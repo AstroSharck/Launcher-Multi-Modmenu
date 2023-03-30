@@ -1,0 +1,1003 @@
+@font-face {
+    font-family: 'RubikLight';
+    src: url('../fonts/Rubik-Light.woff2') format('woff2'),
+        url('../fonts/Rubik-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'RubikLightItalic';
+    src: url('../fonts/Rubik-LightItalic.woff2') format('woff2'),
+        url('fonts/Rubik-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'RubikBlackItalic';
+    src: url('../fonts/Rubik-BlackItalic.woff2') format('woff2'),
+        url('../fonts/Rubik-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'RubikSemiBold';
+    src: url('../fonts/Rubik-SemiBold.woff2') format('woff2'),
+        url('../fonts/Rubik-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RubikSemiBoldItalic';
+    src: url('../fonts/Rubik-SemiBoldItalic.woff2') format('woff2'),
+        url('../fonts/Rubik-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: #1f2325;
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #313740;
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+html, body {
+    background-color: #1b1e23;
+    border-radius: 20px;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'RubikLight', sans-serif;
+    font-weight: 300;
+    color: rgb(231, 231, 231);
+    cursor: default;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.app-bar {
+    position: fixed;
+    width: 100%;
+    height: 20px;
+    background-color: #313740;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    z-index: 9999;
+}
+
+.app-bar img {
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    height: 22px;
+    width: auto;
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+}
+
+.app-bar span {
+    display: block;
+    width: 100%;
+    margin-top: 1px;
+    text-align: center;
+    font-family: 'RubikBlackItalic', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.app-bar .buttons-container {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+}
+
+.app-bar .buttons-container div {
+    display: inline-block;
+    width: 60px;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+.app-bar .buttons-container .min {
+    background-color: #363d47;
+    position: relative;
+    left: 8px;
+    transition: 0.1s ease background-color;
+}
+
+.app-bar .buttons-container .min:hover {
+    background-color: #313740;
+}
+
+.app-bar .buttons-container .max {
+    background-color: #49515d;
+    position: relative;
+    left: 4px;
+    transition: 0.1s ease background-color;
+}
+
+.app-bar .buttons-container .max:hover {
+    background-color: #313740;
+}
+
+.app-bar .buttons-container .kill {
+    background-color: #b83d3d;
+    transition: 0.1s ease background-color;
+}
+
+.app-bar .buttons-container .kill:hover {
+    background-color: rgb(90, 22, 22);
+}
+
+
+.app-bar .buttons-container div h3 {
+    margin: 0px;
+    color: black;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+}
+
+.page .menu-scroller {
+    float: left;
+    padding: 0px 10px 90px 10px;
+    height: calc(100% - 180px);
+    width: calc(30% - 20px);
+    position: relative;
+    top: 40px;
+    overflow-y: auto;
+}
+
+#loading-menuscroller {
+    position: absolute;
+    float: left;
+    padding: 0px 10px 57px 10px;
+    height: calc(100% - 97px);
+    width: calc(30% - 20px);
+    top: 40px;
+    overflow-y: auto;
+}
+
+#loading-menuscroller div {
+    width: 70%;
+    height: 44%;
+    margin-left: 15%;
+    border-radius: 6px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 7px 29px 0px;
+    margin-bottom: 10px;
+    background-color: #313740;
+}
+
+.page .menu-scroller img {
+    width: 70%;
+    margin-left: 15%;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    filter: brightness(0.5);
+    transition: 0.2s ease-out filter;
+}
+
+.page .menu-scroller .selected {
+    filter: brightness(1);
+}
+
+.page .bottom-gradient {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 100px;
+    background: rgb(27,30,35);
+    background: linear-gradient(0deg, rgba(27,30,35,1) 0%, rgba(27,30,35,1) 51%, rgba(27,30,35,0) 100%);
+    pointer-events: none;
+}
+
+.page .menu-info {
+    float: right;
+    padding: 40px;
+    height: calc(100% - 100px);
+    width: calc(70% - 80px);
+    position: relative;
+    top: 20px;
+}
+
+.page .menu-info .changelogs {
+    width: 100%;
+    height: 55%;
+    background-color: #313740;
+    border-radius: 15px 15px 4px 4px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.page .menu-info .changelogs h3 {
+    font-family: 'RubikLightItalic', sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    margin: 0px 0px 0px 10px;
+    padding-top: 5px;
+
+    color: #134ca3;
+    filter: brightness(1.5);
+}
+
+.page .menu-info .changelogs p {
+    padding: 10px 20px 20px 20px;
+    position: absolute;
+    bottom: 0px;
+    width: calc(100% - 40px);
+    height: calc(100% - 60px);
+    margin: 0px;
+    overflow-y: auto;
+}
+
+.page .menu-info .changelogs p::-webkit-scrollbar-track {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 0px;
+}
+
+.page .menu-info .info-features {
+    width: 100%;
+    height: calc(40% - 20px);
+    background-color: #313740;
+    border-radius: 4px 4px 15px 15px;
+    margin-bottom: 15px;
+}
+
+.page .menu-info .info-features h3 {
+    font-family: 'RubikLightItalic', sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    margin: 0px 0px 0px 10px;
+    padding-top: 10px;
+
+    color: #134ca3;
+    filter: brightness(1.5);
+}
+
+.page .menu-info .info-features .infos {
+    float: left;
+    width: calc(50% + 2px);
+    height: 100%;
+    position: relative;
+}
+
+.page .menu-info h3 {
+    font-family: 'RubikSemiBold' !important;
+}
+
+.page .menu-info .info-features .infos h4 {
+    font-family: 'RubikLight', sans-serif;
+    font-weight: 300;
+    margin: 5px 15px;
+}
+
+@media only screen and (min-height: 560px) {
+    .page .menu-info .info-features .infos h4 {
+        margin: 10px 15px;
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    .page .menu-info .info-features .infos h4 {
+        margin: 15px;
+    }
+}
+
+@media only screen and (min-height: 660px) {
+    .page .menu-info .info-features .infos h4 {
+        margin: 20px 15px;
+    }
+}
+
+.page .menu-info .info-features .infos h4 span {
+    font-family: 'RubikLightItalic';
+    font-style: italic;
+}
+
+.page .menu-info .info-features .infos .separator {
+    width: 2px;
+    background-color: #50565f;
+    height: 80%;
+    border-radius: 2px;
+    position: absolute;
+    right: 0px;
+    top: 10%;
+}
+
+.page .menu-info .info-features .features {
+    float: right;
+    width: calc(50% - 2px);
+    height: 100%;
+    position: relative;
+}
+
+.page .menu-info .info-features .features li {
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.page .menu-info .buttons-container {
+    width: 100%;
+    height: 39px;
+}
+
+.page .menu-info .buttons-container .button {
+    display: inline;
+    padding: 10px 20px;
+    background-color: #134ca3;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+
+    transition: 0.2s ease border-radius;
+}
+
+.page .menu-info .buttons-container .button:hover {
+    border-radius: 20px;
+}
+
+.page .menu-info .buttons-container .button span {
+    color: #1b1e23;
+    margin: 0px 5px;
+}
+
+.page .menu-info .buttons-container .disabled {
+    display: none !important;
+} 
+
+.page .menu-info .buttons-container .locked {
+    background: #4a4a4a !important;
+    color: #bdbdbd !important;
+    cursor: not-allowed !important;
+}
+
+.page .menu-info .buttons-container .locked:hover {
+    border-radius: 15px !important;
+}
+
+.page .menu-info .buttons-container .inject {
+    width: calc(100% - 139px);
+    display: inline-block;
+}
+
+.page .menu-info .buttons-container .button img {
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+}
+
+.page .menu-info .buttons-container .social {
+    background-color: #313740;
+    width: 50px; padding: 10px 15px;
+    border-radius: 20px;
+    cursor: default;
+}
+
+.page .menu-info .buttons-container .input-wrapper {
+    display: inline-block;
+    height: 39px;
+    border-radius: 15px;
+    width: calc(100% - 284px);
+    padding: 0px;
+    border: double 2px transparent;
+    background-image: linear-gradient(#1b1e23, #1b1e23), linear-gradient(to left, #134ca3,#134ca3);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+
+    transition: 0.2s ease border-radius;
+}
+
+.page .menu-info .buttons-container .input-wrapper input {
+    height: 100%;
+    outline: none;
+    border: 0px;
+    border-radius: 15px;
+    padding: 0px 10px;
+    background-color: #1b1e23;
+    color: white;
+    font-family: 'RubikLightItalic';
+    font-size: 16px;
+    width: 100%;
+    transition: 0.2s ease border-radius;
+}
+
+.page .menu-info .buttons-container .input-wrapper:hover {
+    border-radius: 20px;
+}
+
+.page .menu-info .buttons-container .input-wrapper:focus {
+    border-radius: 20px;
+}
+
+.page .menu-info .buttons-container .input-wrapper:hover > input {
+    border-radius: 20px;
+}
+
+.page .menu-info .buttons-container .input-wrapper:focus > input {
+    border-radius: 20px;
+}
+
+#settingswindow {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 20px);
+    top: 20px;
+    left: 0px;
+    z-index: 10;
+    transition: 0.2s ease-in opacity;
+}
+
+#settingswindow .sidebar {
+    float: left;
+    width: 30%;
+    height: calc(100% - 50px);
+    padding-top: 50px;
+    background-color: #23272dd9;
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+}
+
+#settingswindow .sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+#settingswindow .sidebar h2 {
+    text-align: center;
+    margin-top: 0px;
+    font-family: 'RubikSemiBold', sans-serif;
+}
+
+#settingswindow .sidebar .button {
+    text-align: center;
+    padding: 15px 0px;
+    border-top: 1px rgb(47, 50, 54) solid;
+    cursor: pointer;
+}
+
+#settingswindow .sidebar .button span {
+    position: relative;
+    left: 0px;
+    transition: 0.1s ease left;
+}
+
+#settingswindow .sidebar .button:hover > span {
+    left: 5px;
+}
+
+#settingswindow .pane {
+    float: right;
+    width: calc(70% - 80px);
+    height: calc(100% - 50px);
+    padding: 50px 40px 0px 40px;
+    background-color: #1b1e23;
+    overflow-y: auto;
+    position: relative;
+    transition: 0.2s ease-out left;
+}
+
+#settingswindow .pane div {
+    transition: 0.1s ease opacity;
+}
+
+#settingswindow .pane .hidden {
+    display: none;
+}
+
+#settingswindow .pane h1 {
+    font-family: 'RubikSemiBold', sans-serif;
+}
+
+#settingswindow .pane h4 {
+    font-weight: 300;
+}
+
+#settingswindow .pane h4 span {
+    font-family: 'RubikLightItalic';
+    font-style: italic;
+}
+
+#settingswindow .pane input {
+    outline: none;
+    background-color: rgb(27, 30, 35);
+    border: 1px solid rgb(47, 50, 54);
+    border-radius: 5px;
+    font-family: 'RubikLight';
+    color: white;
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+#settingswindow .pane select {
+    outline: none;
+    background-color: rgb(27, 30, 35);
+    border: 1px solid rgb(47, 50, 54);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+#settingswindow .pane .sensx-button {
+    display: inline-block;
+    background: rgb(42,147,255);
+    background: linear-gradient(135deg, rgba(42,147,255,1) 0%, rgb(0 96 197) 100%);
+    padding: 20px 20px 20px 60px;
+    font-size: 18px;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0px;
+    cursor: pointer;
+    transition: 0.2s ease-out border-radius;
+}
+
+#settingswindow .pane .sensx-button img {
+    width: 82px;
+    opacity: 0.7;
+    position: absolute;
+    top: 9px;
+    left: -17px;
+    overflow: hidden;
+    transform: rotate(25deg);
+    transition: 0.2s ease-out transform;
+}
+
+#settingswindow .pane .sensx-button:hover {
+    border-radius: 10px;
+}
+
+#settingswindow .pane .sensx-button:hover > img {
+    transform: rotate(20deg);
+}
+
+#settingswindow .pane h4 .checkbox-button {
+    display: inline;
+    border-radius: 5px;
+    padding: 3px 5px 3px 20px;
+    position: relative;
+    font-family: 'RubikSemiBold';
+    margin-left: 5px;
+    cursor: pointer;
+    transition: 0.1s ease border-radius;
+}
+
+#settingswindow .pane h4 .checkbox-button span {
+    position: absolute;
+    left: 7px;
+    font-style: normal;
+    font-family: 'RubikLight';
+}
+
+#settingswindow .pane h4 .checkbox-button:hover {
+    border-radius: 7px;
+}
+
+#settingswindow .pane h4 .enabled {
+    background-color: green;
+    padding: 3px 5px 3px 22px !important;
+}
+
+#settingswindow .pane h4 .enabled span {
+    left: 7px !important;
+    top: 1px !important;
+}
+
+#settingswindow .pane h4 .disabled {
+    background-color: #841f1f;
+}
+
+#settingswindow .pane .separator {
+    height: 1px;
+    width: 80%;
+    margin: 20px 0px;
+    background-color: rgb(47, 50, 54);
+}
+
+#settingswindow .pane #general-pane h4 .autostart-container {
+    background-color: #313740;
+    display: inline-block;
+    padding: 5px 0px;
+    border-radius: 5px;
+}
+
+#settingswindow .pane #general-pane h4 .autostart-container .autostart-img {
+    height: 40px;
+    margin: 0px 10px;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+    height: 40px;
+    margin: 0px 10px;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    border-bottom: 2px solid transparent;
+}
+
+#settingswindow .pane #general-pane h4 .autostart-container .selected {
+    border-bottom: 2px solid #2a93ff !important;
+}
+
+#settingswindow .pane #support-pane textarea {
+    display: block;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    font-family: RubikLight, sans-serif;
+    background-color: rgb(27, 30, 35);
+    outline: none;
+    border: 1px solid rgb(47, 50, 54);
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    margin: 0px -7px 0px 0px;
+    height: 100px;
+}
+
+#settingswindow .pane #support-pane .support-reqtype {
+    width: 100%;
+    text-align: center;
+    background-color: #313740;
+    border-radius: 5px;
+}
+
+#settingswindow .pane #support-pane .support-reqtype span {
+    display: inline-block;
+    margin: 0px 10px;
+    width: 40%;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s ease-in;
+}
+
+#settingswindow .pane #support-pane .support-reqtype .selected {
+    background-color: #2a93ff;
+}
+
+#settingswindow .pane #credits-pane .launcher-pane {
+    float: left;
+    width: calc(50% - 63px);
+    height: calc(100% - 81px);
+    position: relative;
+    padding: 0px 30px;
+}
+
+#settingswindow .pane #credits-pane h5 {
+    color: gray;
+    margin-top: 0px;
+}
+
+#settingswindow .pane #credits-pane li {
+    margin-top: 10px;
+}
+
+#settingswindow .pane #credits-pane li span {
+    color: gray;
+    font-family: 'RubikLightItalic';
+    font-style: italic;
+    font-size: 12px;
+}
+
+#settingswindow .pane #credits-pane .launcher-pane h6 {
+    position: absolute;
+    bottom: 0px;
+    color: gray;
+    text-align: center;
+    width: calc(85% + 60px);
+    left: -30px;
+}
+
+#settingswindow .pane #credits-pane .launcher-pane .separator {
+    width: 1px;
+    height: calc(100% - 40px);
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+#settingswindow .pane #credits-pane .menu-pane {
+        float: right;
+    width: calc(50% - 60px);
+    height: calc(100% - 81px);
+    padding: 0px 30px;
+}
+
+#flwindow {
+    display: none;
+    opacity: 0;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 20px);
+    top: 20px;
+    background-color: #1b1e23;
+    transition: 0.2s ease-in opacity;
+}
+
+#flwindow h4 {
+    margin: 46px 0px 0px 15px;
+    font-family: 'RubikLightItalic';
+    font-weight: 300;
+}
+
+#flwindow img {
+    position: absolute;
+    top: -113px;
+    right: -43px;
+    opacity: 0.1;
+    height: 366px;
+    transform: rotate(9deg);
+}
+
+#flwindow .cards-container {
+    position: absolute;
+    width: calc(100% - 100px);
+    height: calc(100% - 170px);
+    bottom: 0px;
+    padding: 50px;
+    overflow-y: auto;
+    background-color: #1b1e23c7;
+    backdrop-filter: blur(7px);
+}
+
+#flwindow .cards-container .menu {
+    display: inline-block;
+    height: 250px;
+    width: 201.42;
+    top: 0px;
+    border-radius: 5px;
+    margin: 5px 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 20%) 0px 7px 29px 0px;
+    cursor: pointer;
+    transition: 0.2s ease top;
+}
+
+#flwindow .cards-container .menu img {
+    position: unset;
+    transform: unset;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#flwindow .cards-container .menu .overlay {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 34, 34, 0.719);
+    backdrop-filter: blur(3px);
+    border-radius: 5px;
+    transition: 0.2s ease-out opacity;
+}
+
+#flwindow .cards-container .menu:hover > .overlay {
+    opacity: 1;
+}
+
+#flwindow .cards-container .menu .overlay h3 {
+    margin-top: 11px;
+    font-family: 'RubikBlackItalic';
+}
+
+#flwindow .cards-container .menu .overlay h4 {
+    margin: 10px 0px;
+    font-family: 'RubikLight';
+    font-size: 16px;
+}
+
+#flwindow .cards-container .menu .overlay h4 span {
+    font-family: 'RubikLightItalic';
+}
+
+#flwindow .cards-container .menu .overlay h4 .safe {
+    color: green;
+}
+
+#flwindow .cards-container .menu .overlay h4 .unsafe {
+    color: red;
+}
+
+#flwindow .cards-container .menu .overlay h4 .unknown {
+    color: orange;
+}
+
+#flwindow .cards-container .menu .overlay .bottomtext {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+#loading-screen {
+    position: fixed;
+    z-index: 9998;
+    top: 20px;
+    left: 0px;
+    height: calc(100% - 20px);
+    width: 100%;
+    background-color: #1e1b2559;
+    backdrop-filter: blur(2px);
+    opacity: 1;
+
+    transition: 0.2s ease opacity;
+}
+
+#loading-screen div {
+    position: relative;
+    top: 15%;
+    width: fit-content;
+    padding: 20px 51px;
+    background-color: #1b1e23;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 7px 29px 0px;
+
+    transition: 0.1s ease-out top;
+}
+
+#loading-screen div img {
+    filter: hue-rotate(225deg);
+    width: 80px;
+    height: 80px;
+}
+
+#loading-screen div h3 {
+    margin-bottom: 5px;
+    font-family: 'RubikSemiBoldItalic';
+}
+
+#loading-screen div span {
+    color: gray;
+    opacity: 0.7;
+}
+
+#alert {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    z-index: 9997;
+    top: 20px;
+    left: 0px;
+    height: calc(100% - 20px);
+    width: 100%;
+    background-color: #1e1b2559;
+    backdrop-filter: blur(2px);
+    opacity: 1;
+    transition: 0.2s ease opacity;
+}
+
+#alert .window {
+    position: relative;
+    top: calc(15% - 15px);
+    width: 400;
+    height: 250;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 7px 29px 0px;
+    transition: 0.1s ease-out top;
+}
+
+#alert .window .title-container {
+    height: 25%;
+    border-radius: 20px 20px 0px 0px;
+    background-color: #1b1e23b8;
+    backdrop-filter: blur(10px);
+}
+
+#alert .window .title-container h2 {
+    font-family: 'RubikBlackItalic';
+    margin: 0px;
+    position: absolute;
+    bottom: 12px;
+    left: 25px;
+    width: calc(100% - 25px);
+    text-align: left;
+    overflow: hidden;
+}
+
+#alert .window .subtitle-container {
+    background-color: #1b1e23;
+    height: calc(75% - 40px);
+    display: inline-block;
+    width: calc(100% - 40px);
+    border-radius: 0px 0px 20px 20px;
+    padding: 20px;
+}
+
+#alert .window .subtitle-container h4 {
+    margin: 0px;
+    margin-bottom: 10px;
+    text-align: left;
+    overflow-y: auto;
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+#alert .window .subtitle-container div {
+    width: 100%;
+    height: 50px;
+    background-color: #134ca3;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease border-radius;
+}
+
+#alert .window .subtitle-container div:hover {
+    border-radius: 15px;
+}
+
+#alert .window .subtitle-container div span {
+    font-size: 15pt;
+    font-family: 'RubikSemiBold';
+    position: relative;
+    top: 12px;
+}
+
+#loading {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    z-index: 9997;
+    top: 20px;
+    left: 0px;
+    height: calc(100% - 20px);
+    width: 100%;
+    background-color: #1e1b2559;
+    backdrop-filter: blur(2px);
+    opacity: 1;
+    transition: 0.2s ease opacity;
+}
+
+#loading .window {
+    position: relative;
+    top: calc(15% - 15px);
+    width: 400;
+    height: 250;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 7px 29px 0px;
+    transition: 0.1s ease-out top;
+    background-color: #1b1e23;
+}
+
+#loading .window img {
+    filter: hue-rotate(225deg);
+    width: 80px;
+    height: 80px;
+    margin-top: 55px;
+}
+
+#loading .window span {
+    display: block;
+    margin-top: 10px;
+}

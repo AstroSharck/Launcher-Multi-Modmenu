@@ -1,0 +1,53 @@
+{
+  "name": "sens_x",
+  "version": "1.0.0",
+  "productName": "Sens X",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=sens-x.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Sens X\"",
+    "create-installer-win": "node installers/windows/createinstaller.js",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder build --win --x64 --ia32 --publish never"
+  },
+  "keywords": [],
+  "author": "SensX",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.0",
+    "electron-builder": "22.10.5",
+    "electron-rebuild": "^2.3.5"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "electron-builder-squirrel-windows": "^22.11.1",
+    "electron-packager": "^15.2.0",
+    "electron-simple-updater": "^2.0.10",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.3.8",
+    "nan": "^2.14.2",
+    "node-gyp": "^8.0.0",
+    "node-dll-injector": "0.2.3",
+    "node-process-windows": "0.0.2",
+    "request": "^2.88.2",
+    "request-progress": "3.0.0",
+    "electron-updater-robby": "1.0.8"
+  },
+  "build": {
+    "productName": "Sens X",
+    "appId": "org.sensx.sensxapp",
+    "win": {
+      "target": "squirrel",
+      "icon": "./build/sens-x.ico"
+    },
+    "squirrelWindows": {
+      "iconUrl": "https://api.elbmodzz.com/app/sens-x.ico",
+      "loadingGif": "sens.gif"
+    },
+    "files": [
+      "**/*",
+      "src/lang.json"
+    ]
+  }
+}

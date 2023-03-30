@@ -1,0 +1,253 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/main.js"></script>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <title>Sens X</title>
+    <script>
+        const loadedEvent = new Event('AppPrepFinished');
+        document.addEventListener('AppPrepFinished', function () { //peut être faudrai t'il attendre un DOMContentLoaded ? A voir
+            /* Ne pas toucher ! */
+
+            /* const delay = ms => new Promise(res => setTimeout(res, ms));
+            CheckMenuAPI('loadJoker', 'Joker', 'joker')
+            await delay(1000);
+            CheckMenuAPI('loadIvritex', 'Ivritex', 'ivritex')
+            await delay(1000);
+            CheckMenuAPI('loadSlay', 'Slay', 'slay')
+            await delay(1000);
+            CheckMenuAPI('loadELB', 'Sens X', 'Sens') */
+            CheckMenu()
+            CheckForUpdate()
+            //displayLoadingScreen('loading-wait')
+        })
+        /* document.addEventListener('DOMContentLoaded', function () { 
+            CheckMenu()
+        }) */
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="app-bar">
+        <img src="assets/sensx.png" onclick="flWindow()" draggable="false" />
+        <img src="assets/settings.png" onclick="settingsWindow()" style="left: 30px; top: 2px; height: 16px;"
+            draggable="false" />
+        <span>SENS X</span>
+        <div class="buttons-container">
+            <div class="min" onclick="ipcRenderer.send('minimize_app');">
+                <h3>-</h3>
+            </div>
+            <div class="kill" onclick="ipcRenderer.send('close_app');">
+                <h3 style="position: relative; left: 2px;">×</h3>
+            </div>
+        </div>
+    </div>
+    <div id="settingswindow" style="display: none; opacity: 0;">
+        <div class="sidebar">
+            <h2 id="lang-settings">Settings</h2>
+            <div class="button" style="font-style: italic;" onclick="settingsWindow()"><span><i
+                        style="font-style: normal;">🠔</i> <span id="lang-settings-backtosensx">Back to Sens
+                        X</span></span></div>
+            <div class="button" onclick="navSettings('general')"><span id="lang-settings-general">General</span></div>
+            <div class="button" onclick="navSettings('changelogs')"><span
+                    id="lang-settings-changelogs">Changelogs</span></div>
+            <div class="button" onclick="navSettings('support')"><span id="lang-settings-support">Support</span></div>
+            <div class="button" onclick="navSettings('login')"><span id="lang-settings-login">Login</span></div>
+            <div class="button" onclick="navSettings('themes')"><span id="lang-settings-themes">Themes</span></div>
+            <div class="button" onclick="navSettings('credits')"><span id="lang-settings-credits">Credits</span></div>
+        </div>
+        <div class="pane" id="settings-pane">
+            <div id="general-pane">
+                <h1 id="lang-settings-general">General</h1>
+                <h4><span id="lang-settings-version">Version</span>: <span id="settings-app-version"></span></h4>
+                <h4><span id="lang-settings-lastupdated">Last updated</span>: <span id="settings-last-updated"></span>
+                </h4>
+                <h4 style="display: inline-grid; margin-top: 0px;"><span id="lang-settings-autostart">Auto start: Choose
+                        your launcher</span>
+                    <div class="autostart-container" align="center"><img src="assets/steam.png" class="autostart-img"
+                            id="settings-autostart-steam" onclick="settingsAutoStart('steam')" /> <img
+                            src="assets/rockstargames.png" class="autostart-img" id="settings-autostart-rockstargames"
+                            onclick="settingsAutoStart('rockstargames')" /> <img src="assets/epicgames.png"
+                            class="autostart-img" id="settings-autostart-epicgames"
+                            onclick="settingsAutoStart('epicgames')" /></div>
+                </h4>
+                <div class="separator" style="margin-top: 0px;"></div>
+                <h4><span id="lang-settings-serverstatus">Server status</span>: <span
+                        id="settings-server-status"></span></h4>
+                <h4><span id="lang-settings-gameversion">Game version</span>: <span id="settings-game-version"></span>
+                </h4>
+                <div class="separator"></div>
+                <h4><span id="lang-settings-hardwareacceleration">Hardware acceleration</span>: <div
+                        class="checkbox-button disabled" id="settings-hardware-acceleration"
+                        onclick="settingsCheckbox('settings-hardware-acceleration', 'switch', true)"><span
+                            style="position: absolute;">×</span></div>
+                </h4>
+                <h4>Notifications: <div class="checkbox-button disabled" id="settings-notifications"
+                        onclick="settingsCheckbox('settings-notifications', 'switch', true)"><span
+                            style="position: absolute;">×</span></div>
+                </h4>
+                <h4><span id="lang-settings-runatstartup">Run at startup</span>: <div class="checkbox-button disabled"
+                        id="settings-runatstartup" onclick="settingsCheckbox('settings-runatstartup', 'switch', true)">
+                        <span style="position: absolute;">×</span>
+                    </div>
+                </h4>
+                <h4><span id="lang-settings-language">Language</span>: <select onchange="languageChanged()"
+                        id="settings-language">
+                        <option value="en_US">English</option>
+                        <option value="fr_FR">Français</option>
+                        <option value="de_DE">Deutsche</option>
+                        <option value="es_ES">Español</option>
+                        <option value="ru_RU">Pусский</option>
+                        <option value="ch_CH">中文</option>
+                    </select>
+                </h4>
+            </div>
+            <div id="changelogs-pane" class="hidden">
+                <h1 id="lang-settings-changelogs">Changelogs</h1>
+            </div>
+            <div id="support-pane" class="hidden">
+                <h1 id="lang-settings-support">Support</h1>
+                <h4 style="font-family: 'RubikSemiBold';" id="lang-settings-support-subtitle1">If you have any issue
+                    with our services, please fill out this form so we can investigate your problem.</h4>
+                <h4 style="font-family: 'RubikSemiBold';" id="lang-settings-support-subtitle2">And if you have a
+                    suggestion, it would be greatly appreciated !</h4>
+                <h4><span id="lang-settings-language">Language</span>: <select id="settings-support-language">
+                        <option value="en_US">English</option>
+                        <option value="fr_FR">Français</option>
+                    </select></h4>
+                <div class="support-reqtype"><span onclick="supportReqType(0)" id="support-bugreport"
+                        class="selected">Bug report</span>|<span id="support-suggestion"
+                        onclick="supportReqType(1)">Suggestion</span></div>
+                <h4><span id="lang-settings-concernedmod">The concerned mod</span>: <select id="settings-support-mod">
+                        <option value="empty"></option>
+                    </select></h4>
+                <div class="separator"></div>
+                <h4><span id="lang-settings-supportdiscord">Your discord (so we can contact you afterward)</span>:
+                    <input id="discordtag" type="text" placeholder="Ex: ELB#9999" />
+                </h4>
+                <textarea id="lang-settings-describeproblem"
+                    placeholder="Please describe your issue or suggestion..."></textarea>
+                <div class="sensx-button" style="width: calc(100% - 80px); text-align: center;"><img
+                        src="assets/sensx.png" /> <span onclick="SupportSend()" id="lang-settings-sendtosupport">Send to
+                        the support team</span>
+                </div>
+            </div>
+            <div id="login-pane" class="hidden">
+                <h1 id="lang-settings-login">Login</h1>
+                <div class="sensx-button"><img src="assets/sensx.png" /> <span id="lang-settings-clicklogin">Click here
+                        to login</span></div>
+            </div>
+            <div id="themes-pane" class="hidden">
+                <h1 id="lang-settings-themes">Themes</h1>
+                <h4 id="lang-settings-themesubtitle">Click on the theme you want to apply</h4>
+                <div
+                    style="margin: 10px; border-radius: 20px; border: 4px solid green; width: 150px; height: 89px; background: linear-gradient(90deg, rgba(19,76,163,1) 0%, rgba(27,30,35,1) 70%); cursor: pointer;">
+                </div>
+            </div>
+            <div id="credits-pane" class="hidden">
+                <h1 id="lang-settings-credits">Credits</h1>
+                <div class="launcher-pane">
+                    <h5><i>Sens X</i></h5>
+                    <li>ELB <span>ELB#9999</span></li>
+                    <li>AstroSharck <span>AstroSharck#9999</span></li>
+                    <li>AstroViC <span>AstroViC#6969</span></li>
+                    <li>LVN <span>(LVN)#9999</span></li>
+                    <h6 id="land-settings-madewithlove">Made with ❤ by the <i>Sens X</i> team</h6>
+                    <div class="separator"></div>
+                </div>
+                <div class="menu-pane" id="menus-authors">
+                    <h5 id="lang-settings-menus">Menus</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="flwindow" style="display: none; opacity: 0;">
+        <h4><span id="lang-fl-welcometo">Welcome to</span> <span
+                style="font-family: 'RubikSemiBoldItalic'; font-weight: 600;">Sens X</span>! <span
+                id="lang-fl-tostart">To start, click on the menu you want to use</span></h4>
+        <img src="assets/sensx.png" />
+        <div class="cards-container" id="cards-container" align="center">
+        </div>
+    </div>
+    <div id="loading-menuscroller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="page">
+        <div class="menu-scroller" id="home-menus">
+        </div>
+        <div class="bottom-gradient"></div>
+        <div class="menu-info" id="backdropDebugger">
+            <div class="changelogs" id="menu-changelogs">
+                <h3 id="lang-changlogs">Changelogs</h3>
+                <p id="lang-selectmenu">Please select a menu.</p>
+            </div>
+            <div class="info-features">
+                <div class="infos">
+                    <div class="separator"></div>
+                    <h3 id="lang-infos">Infos</h3>
+                    <h4><span id="lang-settings-version">Version</span>: <span id="menu-version"></span></h4>
+                    <h4><span id="lang-lastupdate">Last update</span>: <span id="menu-lastupdated"></span></h4>
+                    <h4><span id="lang-menustatus">Menu status</span>: <span id="menu-status"></span></h4>
+                    <h4><span id="lang-openingkey">Opening key</span>: <span id="menu-openingkey"></span></h4>
+                </div>
+                <div class="features">
+                    <h3 id="lang-features">Features</h3>
+                    <li id="menu-feature1"></li>
+                    <li id="menu-feature2"></li>
+                    <li id="menu-feature3"></li>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="button social"><img src="assets/discord.png" id="discordlink"
+                        onclick="shell.openExternal('https://discord.com/invite/C9K4D7w')" draggable="false"
+                        style="height: 25px; top: 6px;" /><span>|</span><img src="assets/youtube.png" id="youtubelink"
+                        onclick="shell.openExternal('https://www.youtube.com/channel/UCyliodSSktUc2sZnZWg-jmA')"
+                        draggable="false" style="height: 18px;" /></div>
+                <div class="button" style="width: 55px;" id="menu-getkey">Get key</div>
+                <div class="input-wrapper" id="menu-key-wrapper"><input id="menu-key" type="text" autocapitalize="off"
+                        autocomplete="off" spellcheck="false" placeholder="Paste key.." /></div>
+                <div class="button" style="width: 40px;" id="menu-login">Login</div>
+                <div class="button inject disabled" id="menu-inject">Click here to inject</div>
+            </div>
+        </div>
+        <div id="anim-trigger"></div>
+        <div id="alert" align="center">
+            <div class="window" id="alert-window">
+                <div class="title-container">
+                    <h2 id="alert-title">Error</h2>
+                </div>
+                <div class="subtitle-container">
+                    <h4 id="alert-subtitle">An error happened</h4>
+                    <div onclick="closeAlert()">
+                        <span id="lang-ok">OK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loading" align="center" style="display: none;">
+            <div class="window" id="loading-window">
+                <img src="assets/loading.svg" />
+                <span id="loading-text">Error</span>
+            </div>
+        </div>
+        <div id="loading-screen" align="center">
+            <div id="loading-screen-window">
+                <img src="assets/loading.svg" />
+                <h3 id="lang-loading-title">Sens X is loading...</h3>
+                <span id="lang-loading-subtitle">This won't take a while</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
